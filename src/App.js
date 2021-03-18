@@ -1,29 +1,35 @@
-import './App.css';
-import React, { useState } from 'react'
+import "./App.css"
+import React, { useState } from "react"
 
-const Display = (props) => {
-  return (
-    <div>{props.counter}</div>
-  )
-}
+const Display = ({counter}) => <div>{counter}</div>
+
+const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
+
 
 const App = () => {
   const [counter, setCounter] = useState(0)
   const increaseByOne = () => setCounter(counter + 1)
+  const decreaseByOne = () => setCounter(counter - 1)
   const setZero = () => setCounter(0)
+
   return (
     <div>
-    <Display counter={counter} />
-      <button onClick={increaseByOne}>
+      <Display counter={counter} />
+      <Button text="+" handleClick={increaseByOne} />
+      <Button text="-" handleClick={decreaseByOne} />
+      <Button text="reset" handleClick={setZero} />
+      {/* <button onClick={increaseByOne}>
         plus
       </button>
       <button onClick={setZero}>
         zero
       </button>
+      <button onClick={decreaseByOne}>
+        decrease
+      </button> */}
     </div>
   )
 }
-
 
 export default App
 
@@ -60,9 +66,8 @@ export default App
 //   )
 // }
 
-
 // const Hello = ({ name, age }) => {
-  
+
 //   // const name = props.name
 //   // const age = props.age
 
@@ -70,11 +75,9 @@ export default App
 //   //const { name, age } = props
 //   //We can take destructuring a step further.
 
-
 //   /*Component Helper Functions:*/
 //   const yearBorn = () => new Date().getFullYear() - age
-  
-  
+
 //   return (
 //     <div>
 //       <p>{name}, you are {age} years old.</p>
