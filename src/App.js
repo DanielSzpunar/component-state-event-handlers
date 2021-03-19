@@ -1,37 +1,122 @@
 import "./App.css"
 import React, { useState } from "react"
+//Learning & Understanding Hooks
 
-const Display = ({counter}) => <div>{counter}</div>
-
-const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
-
+const History = (props) => {
+  if (props.allClicks.length === 0) {
+    return (
+      <div>
+        The app is used by pressing buttons.
+      </div>
+    )
+  } return (
+    <div>
+      button press history: {props.allClicks.join( ' ')}
+    </div>
+  )
+}
 
 const App = () => {
-  const [counter, setCounter] = useState(0)
-  const increaseByOne = () => setCounter(counter + 1)
-  const decreaseByOne = () => setCounter(counter - 1)
-  const setZero = () => setCounter(0)
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+  const [sumOfClicks, setSum] = useState(0)
 
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setSum(sumOfClicks + 1)
+    setLeft(left + 1)
+  }
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setSum(sumOfClicks + 1)
+    setRight(right + 1)
+  }
+  
+  const Button = ({text, handleClick}) => {
+    return (
+      <button onClick={handleClick}>
+        {text}
+      </button>
+    )
+  }
   return (
     <div>
-      <Display counter={counter} />
-      <Button text="+" handleClick={increaseByOne} />
-      <Button text="-" handleClick={decreaseByOne} />
-      <Button text="reset" handleClick={setZero} />
-      {/* <button onClick={increaseByOne}>
-        plus
-      </button>
-      <button onClick={setZero}>
-        zero
-      </button>
-      <button onClick={decreaseByOne}>
-        decrease
-      </button> */}
+    {left}
+    <Button text='left' handleClick={handleLeftClick} />
+    <Button text='right' handleClick={handleRightClick} />
+    {right}
+      {/* {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right} */}
+      <History allClicks={allClicks} />
+      <p>Sum Of Clicks: {sumOfClicks}</p>
     </div>
   )
 }
 
 export default App
+// const App = () => {
+//   const [clicks, setClicks] = useState({
+//     left:0,
+//     right: 0,
+//   })
+//   const handleLeftClick = () => {
+//     const newClicks = {
+//       ...clicks,
+//       left: clicks.left + 1,
+//       //right: clicks.right
+//     }
+//     setClicks(newClicks)
+//   }
+//   const handleRightClick = () => {
+//     const newClicks = {
+//       ...clicks,
+//       //left: clicks.left,
+//       right: clicks.right + 1
+//     }
+//     setClicks(newClicks)
+//   }
+//   return (
+//     <div>
+//       {clicks.left}
+//       <button onClick={handleLeftClick}>Left</button>
+//       <button onClick={handleRightClick}>Right</button>
+//       {clicks.right}
+//     </div>
+//   )
+// }
+
+// const Display = ({counter}) => <div>{counter}</div>
+
+// const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
+
+//Simple Single Hooks Option
+// const App = () => {
+//   const [counter, setCounter] = useState(0)
+//   const increaseByOne = () => setCounter(counter + 1)
+//   const decreaseByOne = () => setCounter(counter - 1)
+//   const setZero = () => setCounter(0)
+
+//   return (
+//     <div>
+//       <Display counter={counter} />
+//       <Button text="+" handleClick={increaseByOne} />
+//       <Button text="-" handleClick={decreaseByOne} />
+//       <Button text="reset" handleClick={setZero} />
+//       {/* <button onClick={increaseByOne}>
+//         plus
+//       </button>
+//       <button onClick={setZero}>
+//         zero
+//       </button>
+//       <button onClick={decreaseByOne}>
+//         decrease
+//       </button> */}
+//     </div>
+//   )
+// }
 
 // const App = () => {
 //   const [counter, setCounter] = useState(0)
