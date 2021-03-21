@@ -21,15 +21,21 @@ const App = () => {
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([])
   const [sumOfClicks, setSum] = useState(0)
+  const [value, setValue] = useState(10)
+
+  const hello = () => {
+    const handler = () => console.log('hello world')
+    return handler
+  }
 
   const handleLeftClick = () => {
     setAll(allClicks.concat('L'))
-    setSum(sumOfClicks + 1)
+    setSum(allClicks.length + 1)
     setLeft(left + 1)
   }
   const handleRightClick = () => {
     setAll(allClicks.concat('R'))
-    setSum(sumOfClicks + 1)
+    setSum(allClicks.length + 1)
     setRight(right + 1)
   }
   
@@ -52,6 +58,9 @@ const App = () => {
       {right} */}
       <History allClicks={allClicks} />
       <p>Sum Of Clicks: {sumOfClicks}</p>
+      <p>Hello</p>
+      {value}
+      <button onClick={hello()}>button</button>
     </div>
   )
 }
